@@ -19,6 +19,13 @@ import android.widget.Toast;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.NaturalLanguageUnderstanding;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalyzeOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.EntitiesOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
+import com.sixthsolution.apex.Apex;
+import com.sixthsolution.apex.nlp.english.EnglishParser;
 
 import java.io.IOException;
 
@@ -28,7 +35,7 @@ public class TextFromImage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.text_from_image);
+        setContentView(R.layout.fields_from_image);
 
         Uri photoUri = Uri.parse(getIntent().getStringExtra("captureUri"));
 
@@ -45,7 +52,7 @@ public class TextFromImage extends AppCompatActivity {
 
     }
 
-    private class RunOCR extends AsyncTask<Bitmap, Void, String> {
+    private class RunOCR extends AsyncTask<Bitmap, Void, String[]> {
         private Context context;
         TextRecognizer textRecognizer;
 
@@ -53,9 +60,9 @@ public class TextFromImage extends AppCompatActivity {
             this.context = context;
         }
 
-        protected String doInBackground(Bitmap... b) {
+        protected String[] doInBackground(Bitmap... b) {
             Bitmap bitmap = b[0];
-            StringBuilder sb = new StringBuilder();
+            // StringBuilder sb = new StringBuilder();
             TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
 
             if(bitmap != null) {
@@ -87,21 +94,86 @@ public class TextFromImage extends AppCompatActivity {
                         .build();
 
                 SparseArray<TextBlock> textBlocks = textRecognizer.detect(imageFrame);
+                String [] textStrings = new String[textBlocks.size()];
                 for (int i = 0; i < textBlocks.size(); i++) {
                     TextBlock textBlock = textBlocks.get(textBlocks.keyAt(i));
-                    sb.append(textBlock.getValue());
+                    //sb.append(textBlock.getValue()+"\n");
+                    textStrings[i] = textBlock.getValue()+"\n";
+                    //Log.i("OCR Text Block", textBlock.getValue());
                 }
+                return textStrings;
             }
-            return sb.toString();
+
+            return null;
         }
 
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String[] result) {
             TextView ti = (TextView) findViewById(R.id.ti);
-            ti.setText(result);
+
+            // Date extraction test
+            Apex.init(new Apex.ApexBuilder()
+                    .addParser("en", new EnglishParser())
+                    .build());
+
+            String strResult = "";
+            for (int i=0; i<result.length; i++){
+                strResult += result[i];
+                /*if (result[i].toLowerCase().contains("date")) {
+                    Log.i("Apex test", result[i]);
+                    try {
+                        Log.i("APEX TEST", Apex.nlp("en", result[i]).toString());
+                    } catch (org.threeten.bp.DateTimeException e) {
+                        Log.i("Exception tag", "Datetime exception");
+                    }
+                }*/
+            }
+            // Log.i("OCR Entire text", strResult);
+            ti.setText(strResult);
+
 
             Button labResultButton = (Button) findViewById(R.id.saveAsLab);
             labResultButton.setVisibility(View.VISIBLE);
+            // Watson NLU
+            new RunWatsonNLU().execute(strResult);
+
         }
+
+    }
+
+    private class RunWatsonNLU extends AsyncTask<String, Void, String>{
+
+        protected String doInBackground(String... textBlocks){
+
+            String tb = textBlocks[0]; // Assume first list
+            NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(
+                    NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
+                    getResources().getString(R.string.natural_language_understanding_username),
+                    getResources().getString(R.string.natural_language_understanding_password));
+
+            EntitiesOptions entities = new EntitiesOptions.Builder().build();
+            Features features = new Features.Builder().entities(entities).build();
+            StringBuilder sb = new StringBuilder();
+            /* for (int i=0; i<tb.length; i++){
+                Log.i("OCR Text", tb[i]);
+                if (tb[i].length() >= 15) {
+                    AnalyzeOptions parameters = new AnalyzeOptions.Builder().text(tb[i]).features(features).build();
+                    AnalysisResults results = service.analyze(parameters).execute();
+                    Log.i("Watson tag", results.toString());
+                    sb.append(results.toString());
+                }
+            }*/
+            AnalyzeOptions parameters = new AnalyzeOptions.Builder().text(tb).features(features).build();
+            AnalysisResults results = service.analyze(parameters).execute();
+            return sb.toString();
+        }
+
+        protected void onPostExecute(String result){
+            // do something with Watson result (entities)
+            Log.i("Watson tag", result);
+
+
+        }
+
 
     }
 
