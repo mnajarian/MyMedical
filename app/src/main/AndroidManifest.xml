@@ -22,6 +22,8 @@
         <activity android:name=".CaptureImage"></activity>
         <activity android:name=".TextFromImage"></activity>
         <activity android:name=".SearchRecords"></activity>
+        <activity android:name=".SearchResults"></activity>
+        <activity android:name=".DisplaySearchImage"></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="edu.unc.mnajarian.mymedical"

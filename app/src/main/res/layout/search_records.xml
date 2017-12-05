@@ -17,7 +17,7 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/tvDate"
+            android:id="@+id/searchDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""/>
@@ -122,7 +122,8 @@
             android:id="@+id/searchDrugs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:inputType="textNoSuggestions"/>
     </LinearLayout>
 
     <LinearLayout

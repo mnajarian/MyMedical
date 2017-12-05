@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -40,14 +41,14 @@ import java.util.List;
 public class TextFromImage extends AppCompatActivity {
 
     Uri currentPicUri;
-    SQLiteDatabase db;
+    // SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fields_from_image);
 
-        db = this.openOrCreateDatabase(getResources().getString(R.string.iMed_database), Context.MODE_PRIVATE, null);
+        // db = this.openOrCreateDatabase(getResources().getString(R.string.iMed_database), Context.MODE_PRIVATE, null);
         currentPicUri = Uri.parse(getIntent().getStringExtra("captureUri"));
 
         // show thumbnail
@@ -317,13 +318,15 @@ public class TextFromImage extends AppCompatActivity {
         insertQuery.append("INSERT INTO records (date, visit, visit_professional, visit_location," +
                 "drugs, drugs_quantity, tests, reason, additional_notes, photoURI) VALUES (");
         for (int i=0; i<record.size()-1; i++){
-            insertQuery.append("'"+record.get(i)+"',");
+            insertQuery.append("'"+record.get(i).toLowerCase()+"',");
         }
         insertQuery.append("'"+record.get(record.size()-1)+"');");
 
+        iMedDatabaseHelper helper = iMedDatabaseHelper.getInstance(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL(insertQuery.toString());
 
-        /*Cursor c = db.rawQuery("select * from records;", null);
+        /*Cursor c = db.rawQuery("Select * from records where drugs LIKE '%Amoxicillin%';", null);
         c.moveToFirst();
         for (int i=0; i<c.getCount(); i++){
             String str = "";

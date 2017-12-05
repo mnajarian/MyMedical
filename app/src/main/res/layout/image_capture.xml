@@ -21,20 +21,22 @@
 
         <Button
             android:id="@+id/retakePhoto"
-            android:layout_width="175dp"
+            android:layout_width="150dp"
             android:layout_height="75dp"
             android:text="Retake photo"
             android:background="@android:color/holo_blue_light"
             android:textColor="@android:color/white"
+            android:layout_margin="10dp"
             android:onClick="retakePhoto"
             />
 
         <Button
-            android:layout_width="175dp"
+            android:layout_width="150dp"
             android:layout_height="75dp"
             android:text="Extract information"
             android:background="@android:color/holo_blue_light"
             android:textColor="@android:color/white"
+            android:layout_margin="10dp"
             android:onClick="convertToText"/>
 
     </LinearLayout>

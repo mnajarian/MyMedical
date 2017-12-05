@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Results: "
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="25dp"
+        android:layout_margin="10dp"/>
+
+
+    <TextView
+        android:id="@+id/tv1SearchResults"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:onClick="expandToPicture">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="300dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/buttonHome"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:text="Home"
+            android:onClick="goHome"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

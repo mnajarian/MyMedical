@@ -28,12 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Setup database
-        db = this.openOrCreateDatabase(getResources().getString(R.string.iMed_database), Context.MODE_PRIVATE, null);
+
+        /*db = this.openOrCreateDatabase(getResources().getString(R.string.iMed_database), Context.MODE_PRIVATE, null);
         db.execSQL("DROP TABLE IF EXISTS Records");
         db.execSQL("CREATE TABLE records (ID INT PRIMARY KEY, date TEXT," +
                 "visit TEXT, visit_professional TEXT, visit_location TEXT," +
                 "drugs TEXT, drugs_quantity TEXT, tests TEXT," +
-                "reason TEXT, additional_notes TEXT, photoURI TEXT);");
+                "reason TEXT, additional_notes TEXT, photoURI TEXT);");*/
 
     }
 
