@@ -30,7 +30,7 @@
         <Button
             android:layout_width="175dp"
             android:layout_height="75dp"
-            android:text="Convert to text"
+            android:text="Extract information"
             android:onClick="convertToText"/>
 
     </LinearLayout>

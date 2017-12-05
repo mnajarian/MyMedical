@@ -12,7 +12,7 @@
     <Button
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:text="Take a photo"
+        android:text="Add a Record"
         android:background="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
         android:layout_margin="10dp"
@@ -21,20 +21,11 @@
     <Button
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:text="Search your record"
+        android:text="Search health history"
         android:background="@android:color/darker_gray"
         android:textColor="@android:color/white"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:text="Visualize"
-        android:background="@android:color/darker_gray"
-        android:textColor="@android:color/white"
-        android:layout_margin="10dp"/>
-
 
 
 </LinearLayout>

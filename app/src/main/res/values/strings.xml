@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">MyMedical</string>
+    <string name="app_name">iMed</string>
     <string name="natural_language_understanding_username">841e80f2-2c47-43cd-a725-faea297a79e3</string>
     <string name="natural_language_understanding_password">2NWovmCGIQvf</string>
+    <string name="natural_language_understanding_model_ID">20:6544a3bb-43eb-49d7-a81a-4bec78371d4b</string>
+    <string name="iMed_database">iMedDB</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package edu.unc.mnajarian.mymedical;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;

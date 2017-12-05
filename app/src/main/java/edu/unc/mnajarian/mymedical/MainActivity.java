@@ -1,6 +1,8 @@
 package edu.unc.mnajarian.mymedical;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -18,11 +20,21 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     Uri currentPicUri;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Setup database
+        db = this.openOrCreateDatabase(getResources().getString(R.string.iMed_database), Context.MODE_PRIVATE, null);
+        db.execSQL("DROP TABLE IF EXISTS Records");
+        db.execSQL("CREATE TABLE records (ID INT PRIMARY KEY, date TEXT," +
+                "visit TEXT, visit_professional TEXT, visit_location TEXT," +
+                "drugs TEXT, drugs_quantity TEXT, tests TEXT," +
+                "reason TEXT, additional_notes TEXT, photoURI TEXT);");
+
     }
 
     private File createImageFile() throws IOException {
@@ -78,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             Intent x = new Intent(this, CaptureImage.class);
             x.putExtra("captureUri", currentPicUri.toString()); //key, value
+            x.putExtra("db", db.toString());
             startActivity(x);
         }
     }
