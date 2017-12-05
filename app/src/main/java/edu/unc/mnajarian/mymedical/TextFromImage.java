@@ -138,12 +138,7 @@ public class TextFromImage extends AppCompatActivity {
                     }
                 }*/
             }
-            Log.i("OCR Entire text", strResult);
-            //ti.setText(strResult);
 
-
-            //Button labResultButton = (Button) findViewById(R.id.saveAsLab);
-            //labResultButton.setVisibility(View.VISIBLE);
             // Watson NLU
             new RunWatsonNLU(context).execute(strResult);
 
@@ -175,6 +170,8 @@ public class TextFromImage extends AppCompatActivity {
                     NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
                     getResources().getString(R.string.natural_language_understanding_username),
                     getResources().getString(R.string.natural_language_understanding_password));
+
+            //TODO: Run Apex NLP Date parser on any date types
 
             // Extract entities from custom model -- picks out drugs and dates
             EntitiesOptions entitiesModel = new EntitiesOptions.Builder()

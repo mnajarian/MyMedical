@@ -24,6 +24,8 @@
             android:layout_width="175dp"
             android:layout_height="75dp"
             android:text="Retake photo"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
             android:onClick="retakePhoto"
             />
 
@@ -31,6 +33,8 @@
             android:layout_width="175dp"
             android:layout_height="75dp"
             android:text="Extract information"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
             android:onClick="convertToText"/>
 
     </LinearLayout>

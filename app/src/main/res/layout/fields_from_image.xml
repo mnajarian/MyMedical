@@ -221,7 +221,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Verify and save"
-                android:onClick="saveRecord"/>
+                android:onClick="saveRecord"
+                android:background="@android:color/holo_blue_light"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
 
