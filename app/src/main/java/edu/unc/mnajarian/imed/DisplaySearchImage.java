@@ -1,4 +1,4 @@
-package edu.unc.mnajarian.mymedical;
+package edu.unc.mnajarian.imed;
 
 import android.graphics.Bitmap;
 import android.net.Uri;

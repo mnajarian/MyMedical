@@ -1,4 +1,4 @@
-package edu.unc.mnajarian.mymedical;
+package edu.unc.mnajarian.imed;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -6,7 +6,6 @@ import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-import android.widget.EditText;
 
 /**
  * Created by mnajarian on 12/5/17.

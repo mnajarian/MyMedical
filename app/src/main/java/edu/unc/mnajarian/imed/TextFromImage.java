@@ -1,12 +1,9 @@
-package edu.unc.mnajarian.mymedical;
+package edu.unc.mnajarian.imed;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -184,7 +181,7 @@ public class TextFromImage extends AppCompatActivity {
             Log.i("NLU with Model results", resultsModel.toString());
             List<EntitiesResult> erm = resultsModel.getEntities();
             for (int i=0; i<erm.size(); i++){
-                EntitiesResult e = (EntitiesResult) erm.get(i);
+                EntitiesResult e = erm.get(i);
                 if (e.getType().equals("Date")){
                     dates.add(e.getText());
                 }
@@ -199,7 +196,7 @@ public class TextFromImage extends AppCompatActivity {
             Log.i("NLU results no model", results.toString());
             List<EntitiesResult> er = results.getEntities();
             for (int i=0; i<er.size(); i++){
-                EntitiesResult e = (EntitiesResult) er.get(i);
+                EntitiesResult e = er.get(i);
                 // TODO: Don't let it add the user as a Person
                 if (e.getType().equals("Person")){
                     docs.add(e.getText());

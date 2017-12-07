@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.unc.mnajarian.mymedical">
+    package="edu.unc.mnajarian.imed">
 
     <application
         android:allowBackup="true"
@@ -12,21 +12,21 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
-        <activity android:name=".MainActivity">
+        <activity android:name="edu.unc.mnajarian.imed.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CaptureImage"></activity>
-        <activity android:name=".TextFromImage"></activity>
-        <activity android:name=".SearchRecords"></activity>
-        <activity android:name=".SearchResults"></activity>
-        <activity android:name=".DisplaySearchImage"></activity>
+        <activity android:name="edu.unc.mnajarian.imed.CaptureImage"></activity>
+        <activity android:name="edu.unc.mnajarian.imed.TextFromImage"></activity>
+        <activity android:name="edu.unc.mnajarian.imed.SearchRecords"></activity>
+        <activity android:name="edu.unc.mnajarian.imed.SearchResults"></activity>
+        <activity android:name="edu.unc.mnajarian.imed.DisplaySearchImage"></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="edu.unc.mnajarian.mymedical"
+            android:authorities="edu.unc.mnajarian.imed"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
